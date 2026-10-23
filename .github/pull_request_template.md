@@ -10,14 +10,26 @@ Delete any section that does not apply.
 ## What changes
 
 <!--
-One picture. Pick the smallest view that makes the point:
-- A plugin lock update (lazy-lock.json): a table with the columns plugin,
-  old commit, and new commit. Mark plugins that were added or removed.
-- A plugin spec or option change: a diff of the spec or the options table.
-- A language server change: a Mermaid flowchart of how Neovim picks the
-  server command, for example project binary first, then the global binary.
-- A keymap change: a table with the columns mode, keys, old action, and
-  new action.
+One picture, with a Before and an After. Draw two diagrams, Before and
+After, or draw one diagram and mark the changed parts with
+`classDef changed`. For a new thing, write "Before: none."
+
+Pick the diagram with one question: does the next step depend on an input
+from outside, which can come late, come wrong, or not come?
+- Yes: a Mermaid state diagram (stateDiagram-v2). An outside input is a
+  user action, a reply from a service or a device, a webhook, a timer, or
+  a cancel. A state is a place where the thing waits, for example
+  "Waiting for the server to attach" or "Waiting for the next key". An
+  arrow is the event that moves it on. Draw the arrows for the bad events
+  too (timeout, error, cancel, retry), because the change can go wrong
+  there.
+- No: a Mermaid flowchart. The procedure runs from start to end with the
+  data that it has, for example how Neovim picks the server command
+  (project binary first, then the global binary), or the plugin load
+  order at startup. Boxes are steps, arrows mean "then", and diamonds are
+  decisions on that data.
+- No diagram fits (a plugin lock update, a keymap, an option value): a
+  table of old and new values, a diff, or pseudocode.
 Add up to three bullets for what the picture misses, including what you
 left out on purpose.
 -->
